@@ -1,0 +1,44 @@
+.colorDisplayContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    /*margin:20px auto 0px;*/
+
+    border: 1px solid grey;
+    border-radius: 3px;
+
+    padding: 10px 0px 0px 10px;
+}
+
+.colorDisplayBuffer {
+    box-sizing: border-box;
+    min-width: 130px;
+
+    padding: 0px 10px 10px 0px;
+}
+
+@media only screen and ( max-width: 600px) {
+    .colorDisplayBuffer {
+        width: 50%;
+    }
+}
+
+@media only screen and ( min-width: 600px) {
+    .colorDisplayBuffer {
+        width: 33.33%;
+    }
+}
+
+@media only screen and ( min-width: 768px) {
+    .colorDisplayBuffer {
+        width: 25%;
+    }
+}
+
+@media only screen and ( min-width: 992px) {
+    .colorDisplayBuffer {
+        width: 20%;
+    }
+}
