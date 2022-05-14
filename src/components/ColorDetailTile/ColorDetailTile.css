@@ -1,0 +1,30 @@
+.colorDetailTile {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    border: 1px solid grey;
+    border-radius: 3px;
+
+    padding: 10px;
+}
+
+.colorPatch {
+    width: 100px;
+    height: 100px;
+
+    margin:auto;
+
+    /*background-color: red;*/
+}
+
+.hsvDetails {
+    width: 80%;
+
+    margin: auto;
+}
+
+.hsvDetailRow {
+    display: flex;
+    justify-content: space-between;
+}
