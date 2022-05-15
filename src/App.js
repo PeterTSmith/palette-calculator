@@ -10,7 +10,7 @@ function App() {
         {
             id: initialSwatchId,
             name: "",
-            colors: 0,
+            colors: 1,
             hue: 0,
             sat: 0,
             val: 0,

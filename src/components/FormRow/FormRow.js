@@ -2,20 +2,24 @@ import React, { useEffect, useState } from "react";
 import './FormRow.css';
 
 export const FormRow = (props) => {
-    const { label, number, setNumber, write} = props;
+    const { label, number, setNumber, defaultVal, write} = props;
 
     return (
         <div className='formRow'>
             <div>
                 {label}:
             </div>
-            <FormRowValue write={write} number={number} setNumber={setNumber}/>
+            <FormRowValue write={write} number={number} setNumber={setNumber} defaultVal={defaultVal} />
         </div>
     );
 }
 
+FormRow.defaultProps = {
+    defaultVal: 1
+}
+
 const FormRowValue = (props) => {
-    const { write, number, setNumber } = props;
+    const { write, number, setNumber, defaultVal } = props;
     const [localNumber, setLocalNumber] = useState(number);
 
     if(write) {
@@ -26,8 +30,8 @@ const FormRowValue = (props) => {
             }}
             onBlur={() => {
                 const newNum = parseInt(localNumber);
-                setNumber(isNaN(newNum) ? 0 : newNum);
-                setLocalNumber(isNaN(newNum) ? 0 : newNum);
+                setNumber(isNaN(newNum) || newNum < 1 ? defaultVal : newNum);
+                setLocalNumber(isNaN(newNum) || newNum < 1 ? defaultVal : newNum);
             }} />
         );
     }
