@@ -1,24 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './FormRow.css';
 
 export const FormRow = (props) => {
-    const { type, number, setNumber, write} = props;
+    const { label, number, setNumber, defaultVal, write} = props;
 
     return (
         <div className='formRow'>
             <div>
-                {type}:
+                {label}:
             </div>
-            {inputOrDisplay(write, number, setNumber)}
+            <FormRowValue write={write} number={number} setNumber={setNumber} defaultVal={defaultVal} />
         </div>
     );
 }
 
-const inputOrDisplay = (write, number, setNumber) => {
+FormRow.defaultProps = {
+    defaultVal: 1
+}
+
+const FormRowValue = (props) => {
+    const { write, number, setNumber, defaultVal } = props;
+    const [localNumber, setLocalNumber] = useState(number);
+
     if(write) {
         return (
-            <input className='formRowInput' value={number} onChange={(event) => {
-                setNumber(event.target.value);
+            <input className='formRowInput' value={localNumber}
+            onChange={(event) => {
+                setLocalNumber(event.target.value);
+            }}
+            onBlur={() => {
+                const newNum = parseInt(localNumber);
+                setNumber(isNaN(newNum) || newNum < 1 ? defaultVal : newNum);
+                setLocalNumber(isNaN(newNum) || newNum < 1 ? defaultVal : newNum);
             }} />
         );
     }
