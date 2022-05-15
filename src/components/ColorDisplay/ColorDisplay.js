@@ -6,9 +6,9 @@ export const ColorDisplay = (props) => {
     const { activeColors } = props;
     return (
         <div className="colorDisplayContainer">
-            {activeColors.map((color) => {
+            {activeColors.map((color, i) => {
                 return (
-                    <ColorDisplayBuffer>
+                    <ColorDisplayBuffer key={`color-${i}`}>
                         <ColorDetailTile {...color} />
                     </ColorDisplayBuffer>
                 );

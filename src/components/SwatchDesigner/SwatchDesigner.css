@@ -1,0 +1,33 @@
+.swatchDesignerContainer {
+    display: flex;
+
+    border: 1px solid grey;
+    border-radius: 3px;
+
+    padding: 10px;
+}
+
+.baseColorPatchContainer {
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+}
+
+.baseSwatchDetailContainer {
+    min-width: 150px;
+    margin-right: 10px;
+}
+
+.hueFunctionContainer {
+    min-width: 150px;
+    margin-right: 10px;
+}
+
+.satFunctionContainer {
+    min-width: 150px;
+    margin-right: 10px;
+}
+
+.valFunctionContainer {
+    min-width: 150px;
+}
