@@ -11,9 +11,9 @@ export const ColorDetailTile = (props) => {
                 <ColorPatch hue={hue} sat={sat} val={val} />
             </div>
             <div className='hsvDetails'>
-                <FormRow type={"hue"} number={hue} />
-                <FormRow type={"sat"} number={sat} />
-                <FormRow type={"val"} number={val} />
+                <FormRow label={"hue"} number={hue} />
+                <FormRow label={"sat"} number={sat} />
+                <FormRow label={"val"} number={val} />
             </div>
         </div>
     );
