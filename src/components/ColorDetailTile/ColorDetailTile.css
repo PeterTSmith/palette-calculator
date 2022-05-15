@@ -9,22 +9,15 @@
     padding: 10px;
 }
 
-.colorPatch {
+.colorPatchContainer {
     width: 100px;
     height: 100px;
 
-    margin:auto;
-
-    /*background-color: red;*/
+    margin: auto;
 }
 
 .hsvDetails {
     width: 80%;
 
     margin: auto;
-}
-
-.hsvDetailRow {
-    display: flex;
-    justify-content: space-between;
 }

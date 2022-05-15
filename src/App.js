@@ -1,5 +1,6 @@
 import './App.css';
 import ColorDisplay from './components/ColorDisplay/ColorDisplay';
+import SwatchDesigner from './components/SwatchDesigner/SwatchDesigner';
 
 function App() {
   const activeColors = [
@@ -52,6 +53,7 @@ function App() {
   return (
     <div className="App">
       <ColorDisplay activeColors={activeColors} />
+      <SwatchDesigner />
     </div>
   );
 }
