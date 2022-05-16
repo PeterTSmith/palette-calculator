@@ -1,2 +1,17 @@
 .App {
 }
+
+.toolbarLayout {
+    width: 98%;
+    margin: 1%;
+}
+
+.colorDisplayLayout {
+    width: 98%;
+    margin: 1%;
+}
+
+.swatchLayout {
+    width: 98%;
+    margin: 1%;
+}

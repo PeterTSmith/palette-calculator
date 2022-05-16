@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ColorPatch from "../ColorPatch/ColorPatch";
 import FormRow from "../FormRow/FormRow";
 import './SwatchDesigner.css';
 
 export const SwatchDesigner = (props) => {
     const { swatch, setSwatchValue, setActiveSwatchId } = props;
-    const { colors, hue, sat, val, hueLinearCoef, satLinearCoef, valLinearCoef } = swatch;
+    const { id, colors, hue, sat, val, hueLinearCoef, satLinearCoef, valLinearCoef } = swatch;
 
     const setColors = (value) => setSwatchValue("colors", value);
     const setHue = (value) => setSwatchValue("hue", value);
@@ -17,14 +17,14 @@ export const SwatchDesigner = (props) => {
 
     return (
         <div className="swatchDesignerContainer">
-            <div className="baseColorPatchContainer">
+            <div className="baseColorPatchContainer" onClick={() => {setActiveSwatchId(id)}}>
                 <ColorPatch hue={hue} sat={sat} val={val} />
             </div>
             <div className="baseSwatchDetailContainer">
                 <FormRow label={"Colors"} number={colors} setNumber={setColors} write />
-                <FormRow label={"Base Hue"} number={hue} setNumber={setHue} write />
-                <FormRow label={"Base Sat"} number={sat} setNumber={setSat} write />
-                <FormRow label={"Base Val"} number={val} setNumber={setVal} write />
+                <FormRow label={"Base Hue"} number={hue} setNumber={setHue} minVal={0} maxVal={359} write />
+                <FormRow label={"Base Sat"} number={sat} setNumber={setSat} minVal={0} maxVal={100} write />
+                <FormRow label={"Base Val"} number={val} setNumber={setVal} minVal={0} maxVal={100} write />
             </div>
             <div className="hueFunctionContainer">
                 <FormRow label={"Linear Coef"} number={hueLinearCoef} setNumber={setHueLinearCoef} write />

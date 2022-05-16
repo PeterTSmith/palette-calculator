@@ -1,23 +1,13 @@
+import clonePalette from "./clonePalette";
+
 export const setSwatchValueFactory = (swatchName, palette, setPalette) => {
     return ((index, newValue) => {
-        const newPalette = palette.map((swatch) => {
-            const newSwatch = {
-                id: swatch.id,
-                name: swatch.name,
-                colors: swatch.colors,
-                hue: swatch.hue,
-                sat: swatch.sat,
-                val: swatch.val,
-                hueLinearCoef: swatch.hueLinearCoef,
-                satLinearCoef: swatch.satLinearCoef,
-                valLinearCoef: swatch.valLinearCoef
-            };
+        const newPalette = clonePalette(palette);
 
+        newPalette.forEach((swatch) => {
             if(swatch.id === swatchName) {
-                newSwatch[index] = newValue;
+                swatch[index] = newValue;
             }
-
-            return newSwatch;
         });
 
         setPalette(newPalette);
