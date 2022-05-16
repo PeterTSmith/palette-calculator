@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import './FormRow.css';
 
 export const FormRow = (props) => {
-    const { label, number, setNumber, defaultVal, write} = props;
+    const { label, number, setNumber, defaultVal, minVal, maxVal, write} = props;
 
     return (
         <div className='formRow'>
             <div>
                 {label}:
             </div>
-            <FormRowValue write={write} number={number} setNumber={setNumber} defaultVal={defaultVal} />
+            <FormRowValue write={write} number={number} setNumber={setNumber} defaultVal={defaultVal} minVal={minVal} maxVal={maxVal} />
         </div>
     );
 }
@@ -19,7 +19,7 @@ FormRow.defaultProps = {
 }
 
 const FormRowValue = (props) => {
-    const { write, number, setNumber, defaultVal } = props;
+    const { write, number, setNumber, defaultVal, minVal, maxVal } = props;
     const [localNumber, setLocalNumber] = useState(number);
 
     if(write) {
@@ -29,9 +29,17 @@ const FormRowValue = (props) => {
                 setLocalNumber(event.target.value);
             }}
             onBlur={() => {
-                const newNum = parseInt(localNumber);
-                setNumber(isNaN(newNum) || newNum < 1 ? defaultVal : newNum);
-                setLocalNumber(isNaN(newNum) || newNum < 1 ? defaultVal : newNum);
+                let newNum = parseInt(localNumber);
+                if(isNaN(newNum)) {
+                    newNum = defaultVal;
+                } else if(minVal !== undefined && newNum < minVal) {
+                    newNum = minVal;
+                } else if(maxVal !== undefined && newNum > maxVal) {
+                    newNum = maxVal;
+                }
+
+                setNumber(newNum);
+                setLocalNumber(newNum);
             }} />
         );
     }

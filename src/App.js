@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Toolbar from './components/Toolbar/Toolbar';
 import ColorDisplay from './components/ColorDisplay/ColorDisplay';
 import SwatchDesigner from './components/SwatchDesigner/SwatchDesigner';
-import setSwatchValueFactory from './utils/setSwatchValueFactory';
+import { setSwatchValueFactory, loopAdjustNumber } from './utils';
 import './App.css';
 
 function App() {
@@ -25,19 +26,28 @@ function App() {
     const activeColors = [];
 
     for( let i = 0; i < activeSwatch?.colors; i++ ) {
-        activeColors.push({
-            hue: activeSwatch.hue + activeSwatch.hueLinearCoef*i,
-            sat: activeSwatch.sat + activeSwatch.satLinearCoef*i,
-            val: activeSwatch.val + activeSwatch.valLinearCoef*i
-        });
+        const newColor = {
+            hue: loopAdjustNumber(activeSwatch.hue + activeSwatch.hueLinearCoef*i, 0, 359),
+            sat: loopAdjustNumber(activeSwatch.sat + activeSwatch.satLinearCoef*i, 0, 100),
+            val: loopAdjustNumber(activeSwatch.val + activeSwatch.valLinearCoef*i, 0, 100)
+        };
+
+        activeColors.push(newColor);
     }
 
     return (
         <div className="App">
-            {<ColorDisplay activeColors={activeColors} />}
+            <div className='toolbarLayout'>
+                <Toolbar palette={palette} setPalette={setPalette} activeSwatchId={activeSwatchId} setActiveSwatchId={setActiveSwatchId} />
+            </div>
+            <div className='colorDisplayLayout'>
+                {<ColorDisplay activeColors={activeColors} />}
+            </div>
             {palette.map((swatch) => {
                 return (
-                    <SwatchDesigner swatch={swatch} setSwatchValue={setSwatchValueFactory(swatch.id, palette, setPalette)} setActiveSwatchId={setActiveSwatchId} />
+                    <div className='swatchLayout'>
+                        <SwatchDesigner key={swatch.id} swatch={swatch} setSwatchValue={setSwatchValueFactory(swatch.id, palette, setPalette)} setActiveSwatchId={setActiveSwatchId} />
+                    </div>
                 );
             })}
         </div>
