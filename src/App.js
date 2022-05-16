@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Toolbar from './components/Toolbar/Toolbar';
 import ColorDisplay from './components/ColorDisplay/ColorDisplay';
 import SwatchDesigner from './components/SwatchDesigner/SwatchDesigner';
-import { setSwatchValueFactory, loopAdjustNumber } from './utils';
+import { setSwatchValueFactory, boundAdjustNumber, loopAdjustNumber } from './utils';
 import './App.css';
 
 function App() {
@@ -28,8 +28,8 @@ function App() {
     for( let i = 0; i < activeSwatch?.colors; i++ ) {
         const newColor = {
             hue: loopAdjustNumber(activeSwatch.hue + activeSwatch.hueLinearCoef*i, 0, 359),
-            sat: loopAdjustNumber(activeSwatch.sat + activeSwatch.satLinearCoef*i, 0, 100),
-            val: loopAdjustNumber(activeSwatch.val + activeSwatch.valLinearCoef*i, 0, 100)
+            sat: boundAdjustNumber(activeSwatch.sat + activeSwatch.satLinearCoef*i, 0, 100),
+            val: boundAdjustNumber(activeSwatch.val + activeSwatch.valLinearCoef*i, 0, 100)
         };
 
         activeColors.push(newColor);
