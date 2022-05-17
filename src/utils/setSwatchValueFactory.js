@@ -1,16 +1,12 @@
-import clonePalette from "./clonePalette";
+import cloneSwatch from "./cloneSwatch";
 
-export const setSwatchValueFactory = (swatchName, palette, setPalette) => {
-    return ((index, newValue) => {
-        const newPalette = clonePalette(palette);
+export const setSwatchValueFactory = (index, swatch, setSwatch) => {
+    return ((newValue) => {
+        const newSwatch = cloneSwatch(swatch);
 
-        newPalette.forEach((swatch) => {
-            if(swatch.id === swatchName) {
-                swatch[index] = newValue;
-            }
-        });
+        newSwatch[index] = newValue;
 
-        setPalette(newPalette);
+        setSwatch(newSwatch);
     });
 };
 

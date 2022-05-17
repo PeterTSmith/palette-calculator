@@ -1,5 +1,6 @@
 .swatchDesignerContainer {
     display: flex;
+    flex-direction: column;
 
     border: 1px solid grey;
     border-radius: 3px;
@@ -7,27 +8,40 @@
     padding: 10px;
 }
 
-.baseColorPatchContainer {
-    width: 150px;
-    height: 150px;
-    margin-right: 15px;
+@media only screen and ( min-width: 992px) {
+    .swatchDesignerContainer {
+        flex-direction: row;
+    }
 }
+
+.baseColorPatchContainer {
+    width: 100%;
+    height: 50px;
+
+    margin-bottom: 10px;
+}
+
+@media only screen and ( min-width: 992px) {
+    .baseColorPatchContainer {
+        min-width: 150px;
+        width: 150px;
+        min-height: 150px;
+        height: 150px;
+        
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+}
+
 
 .baseSwatchDetailContainer {
     min-width: 150px;
-    margin-right: 15px;
+    
+    margin-bottom: 10px;
 }
 
-.hueFunctionContainer {
-    min-width: 150px;
-    margin-right: 15px;
-}
-
-.satFunctionContainer {
-    min-width: 150px;
-    margin-right: 15px;
-}
-
-.valFunctionContainer {
-    min-width: 150px;
+@media only screen and ( min-width: 992px) {
+    .baseSwatchDetailContainer {
+        margin-right: 15px;
+    }
 }
