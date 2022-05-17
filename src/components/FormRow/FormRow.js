@@ -9,13 +9,9 @@ export const FormRow = (props) => {
             <div>
                 {label}:
             </div>
-            <FormRowValue write={write} number={number} setNumber={setNumber} defaultVal={defaultVal} minVal={minVal} maxVal={maxVal} />
+            <FormRowValue write={write} number={number} setNumber={setNumber} defaultVal={defaultVal ?? minVal} minVal={minVal} maxVal={maxVal} />
         </div>
     );
-}
-
-FormRow.defaultProps = {
-    defaultVal: 1
 }
 
 const FormRowValue = (props) => {
@@ -29,7 +25,7 @@ const FormRowValue = (props) => {
                 setLocalNumber(event.target.value);
             }}
             onBlur={() => {
-                let newNum = parseInt(localNumber);
+                let newNum = parseFloat(localNumber);
                 if(isNaN(newNum)) {
                     newNum = defaultVal;
                 } else if(minVal !== undefined && newNum < minVal) {
@@ -37,7 +33,6 @@ const FormRowValue = (props) => {
                 } else if(maxVal !== undefined && newNum > maxVal) {
                     newNum = maxVal;
                 }
-
                 setNumber(newNum);
                 setLocalNumber(newNum);
             }} />

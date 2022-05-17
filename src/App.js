@@ -1,24 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Toolbar from './components/Toolbar/Toolbar';
 import ColorDisplay from './components/ColorDisplay/ColorDisplay';
 import SwatchDesigner from './components/SwatchDesigner/SwatchDesigner';
-import { setSwatchValueFactory, boundAdjustNumber, loopAdjustNumber } from './utils';
+import { setSwatchFactory, boundAdjustNumber, loopAdjustNumber } from './utils';
+import { Swatch } from './classes';
 import './App.css';
 
 function App() {
     const initialSwatchId = new Date().getTime();
     const [ palette, setPalette ] = useState([
-        {
-            id: initialSwatchId,
-            name: "",
-            colors: 1,
-            hue: 0,
-            sat: 0,
-            val: 0,
-            hueLinearCoef: 0,
-            satLinearCoef: 0,
-            valLinearCoef: 0
-        }
+        new Swatch(initialSwatchId, "", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     ]);
     const [ activeSwatchId, setActiveSwatchId ] = useState(initialSwatchId);
 
@@ -26,10 +17,13 @@ function App() {
     const activeColors = [];
 
     for( let i = 0; i < activeSwatch?.colors; i++ ) {
+        const newHue = activeSwatch.hue + activeSwatch.hueLinearCoef*i + activeSwatch.hueSquareCoef*(i ** 2);
+        const newSat = activeSwatch.sat + activeSwatch.satLinearCoef*i + activeSwatch.satSquareCoef*(i ** 2);
+        const newVal = activeSwatch.val + activeSwatch.valLinearCoef*i + activeSwatch.valSquareCoef*(i ** 2);
         const newColor = {
-            hue: loopAdjustNumber(activeSwatch.hue + activeSwatch.hueLinearCoef*i, 0, 359),
-            sat: boundAdjustNumber(activeSwatch.sat + activeSwatch.satLinearCoef*i, 0, 100),
-            val: boundAdjustNumber(activeSwatch.val + activeSwatch.valLinearCoef*i, 0, 100)
+            hue: loopAdjustNumber(newHue, 0, 359),
+            sat: boundAdjustNumber(newSat, 0, 100),
+            val: boundAdjustNumber(newVal, 0, 100)
         };
 
         activeColors.push(newColor);
@@ -46,7 +40,7 @@ function App() {
             {palette.map((swatch) => {
                 return (
                     <div className='swatchLayout'>
-                        <SwatchDesigner key={swatch.id} swatch={swatch} setSwatchValue={setSwatchValueFactory(swatch.id, palette, setPalette)} setActiveSwatchId={setActiveSwatchId} />
+                        <SwatchDesigner key={swatch.id} swatch={swatch} setSwatch={setSwatchFactory(palette, setPalette)} setActiveSwatchId={setActiveSwatchId} />
                     </div>
                 );
             })}

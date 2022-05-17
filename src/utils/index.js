@@ -4,4 +4,5 @@ export { deleteSwatchFactory } from "./swatchControls/deleteSwatchFactory";
 export { clonePalette } from "./clonePalette";
 export { boundAdjustNumber } from "./boundAdjustNumber";
 export { loopAdjustNumber } from "./loopAdjustNumber";
+export { setSwatchFactory } from "./setSwatchFactory";
 export { setSwatchValueFactory } from "./setSwatchValueFactory";

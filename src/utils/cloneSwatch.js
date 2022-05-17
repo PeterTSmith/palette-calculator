@@ -1,15 +1,9 @@
-export const cloneSwatch = (swatch, id) => {
-    return {
-        id: id ?? swatch.id,
-        name: swatch.name,
-        colors: swatch.colors,
-        hue: swatch.hue,
-        sat: swatch.sat,
-        val: swatch.val,
-        hueLinearCoef: swatch.hueLinearCoef,
-        satLinearCoef: swatch.satLinearCoef,
-        valLinearCoef: swatch.valLinearCoef
-    };
+import { Swatch } from "../classes";
+
+export const cloneSwatch = (swatch, idIn) => {
+    const { id, name, colors, hue, sat, val, hueLinearCoef, hueSquareCoef, satLinearCoef, satSquareCoef, valLinearCoef, valSquareCoef } = swatch;
+
+    return new Swatch(idIn ?? id, name, colors, hue, sat, val, hueLinearCoef, hueSquareCoef, satLinearCoef, satSquareCoef, valLinearCoef, valSquareCoef);
 }
 
 export default cloneSwatch;

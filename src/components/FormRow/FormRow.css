@@ -1,8 +1,13 @@
 .formRow {
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
 
     margin-bottom: 4px;
+}
+
+.formRow:last-child {
+    margin-bottom: 0;
 }
 
 .formRowInput {
