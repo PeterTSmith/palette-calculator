@@ -10,9 +10,9 @@ export const SwatchDesigner = (props) => {
 
     const baseValueFields = [
         new FieldValue("colors", "Colors", 1),
-        new FieldValue("hue", "Base Hue", 0, 359),
-        new FieldValue("sat", "Base Sat", 0, 100),
-        new FieldValue("val", "Base Val", 0, 100)
+        new FieldValue("hue", "Base Hue", 0, 0, 359),
+        new FieldValue("sat", "Base Sat", 0, 0, 100),
+        new FieldValue("val", "Base Val", 0, 0, 100)
     ];
     const hueFunctionFields = [new FieldValue("hueLinearCoef", "Linear Coef", 0), new FieldValue("hueSquareCoef", "Square Coef", 0)];
     const satFunctionFields = [new FieldValue("satLinearCoef", "Linear Coef", 0), new FieldValue("satSquareCoef", "Square Coef", 0)];
