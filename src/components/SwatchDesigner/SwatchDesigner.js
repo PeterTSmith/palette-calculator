@@ -1,12 +1,13 @@
 import React from "react";
 import ColorPatch from "../ColorPatch/ColorPatch";
 import SwatchFunction from "../SwatchFunction/SwatchFunction";
+import { setSwatchValueFactory } from "../../utils";
 import { FieldValue } from "../../classes";
 import './SwatchDesigner.css';
 
 export const SwatchDesigner = (props) => {
-    const { swatch, setSwatch, setActiveSwatchId } = props;
-    const { id, hue, sat, val } = swatch;
+    const { swatch, setSwatch, setActiveSwatchId, setBase, setHue, setMod, setVal } = props;
+    const { id, hue, sat, val, hueCustom, satCustom, valCustom } = swatch;
 
     const baseValueFields = [
         new FieldValue("colors", "Colors", 1),
@@ -20,15 +21,22 @@ export const SwatchDesigner = (props) => {
 
     return (
         <div className="swatchDesignerContainer">
-            <div className="baseColorPatchContainer" onClick={() => { setActiveSwatchId(id) }}>
+            {setBase && (<div className="baseColorPatchContainer" onClick={() => { setActiveSwatchId(id) }}>
                 <ColorPatch hue={hue} sat={sat} val={val} />
-            </div>
-            <SwatchFunction header="Base Values" swatch={swatch} setSwatch={setSwatch} fields={baseValueFields} />
-            <SwatchFunction header="Hue Mod Function" swatch={swatch} setSwatch={setSwatch} fields={hueFunctionFields} />
-            <SwatchFunction header="Sat Mod Function" swatch={swatch} setSwatch={setSwatch} fields={satFunctionFields} />
-            <SwatchFunction header="Val Mod Function" swatch={swatch} setSwatch={setSwatch} fields={valFunctionFields} />
+            </div>)}
+            {setBase && <SwatchFunction header="Base Values" swatch={swatch} setSwatch={setSwatch} fields={baseValueFields} />}
+            {setHue && <SwatchFunction header="Hue Mod Function" swatch={swatch} setSwatch={setSwatch} isCustom={hueCustom} setIsCustom={setSwatchValueFactory("hueCustom", swatch, setSwatch)} fields={hueFunctionFields} />}
+            {setMod && <SwatchFunction header="Sat Mod Function" swatch={swatch} setSwatch={setSwatch} isCustom={satCustom} setIsCustom={setSwatchValueFactory("satCustom", swatch, setSwatch)} fields={satFunctionFields} />}
+            {setVal && <SwatchFunction header="Val Mod Function" swatch={swatch} setSwatch={setSwatch} isCustom={valCustom} setIsCustom={setSwatchValueFactory("valCustom", swatch, setSwatch)} fields={valFunctionFields} />}
         </div>
     );
+}
+
+SwatchDesigner.defaultProps = {
+    setBase: true,
+    setHue: true,
+    setMod: true,
+    setVal: true
 }
 
 export default SwatchDesigner;
