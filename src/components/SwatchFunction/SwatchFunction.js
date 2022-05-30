@@ -1,10 +1,12 @@
 import React from "react";
 import FormRow from "../FormRow/FormRow";
 import { setSwatchValueFactory } from "../../utils";
+import { FuncPole } from "../../classes/Swatch";
 import "./SwatchFunction.css";
+import "../FormRow/FormRow.css";
 
 export const SwatchFunction = (props) => {
-    const { header, swatch, setSwatch, isCustom, setIsCustom, fields } = props;
+    const { header, swatch, setSwatch, isCustom, setIsCustom, funcPole, setFuncPole, fields } = props;
     const { canDefault } = swatch;
 
     return (
@@ -16,6 +18,17 @@ export const SwatchFunction = (props) => {
                 {canDefault && (isCustom !== undefined) && <div>
                     Custom <input className="customCheckbox" type="checkbox" checked={isCustom} onChange={() => {setIsCustom(!isCustom)}} />
                 </div>}
+            </div>
+            <div className='formRow'>
+                Pole <select className="poleSelect" value={funcPole} onChange={(event) => {setFuncPole(event.target.value)}}>
+                    {Object.values(FuncPole).map((value) => {
+                        return (
+                            <option key={value} value={value}>
+                                {value}
+                            </option>
+                        );
+                    })}
+                </select>
             </div>
             {fields.map((fieldDetails) => {
                 const { field, label, defaultVal, minVal, maxVal } = fieldDetails;

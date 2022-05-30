@@ -2,40 +2,23 @@ import React, { useState } from 'react';
 import Toolbar from './components/Toolbar/Toolbar';
 import ColorDisplay from './components/ColorDisplay/ColorDisplay';
 import SwatchDesigner from './components/SwatchDesigner/SwatchDesigner';
-import { setSwatchFactory, boundAdjustNumber, loopAdjustNumber } from './utils';
+import { setSwatchFactory } from './utils';
 import { Swatch } from './classes';
 import './App.css';
+import { FuncPole } from './classes/Swatch';
+import generateActiveColors from './utils/generateActiveColors';
 
 function App() {
     const initialSwatchId = new Date().getTime();
     const [ palette, setPalette ] = useState([
-        new Swatch(initialSwatchId, "", true, 1, 0, 0, 0, false, 0, 0, false, 0, 0, false, 0, 0)
+        new Swatch(initialSwatchId, "", true, 1, 0, 0, 0, false, FuncPole.start, 0, 0, 0, false, FuncPole.start, 0, 0, 0, false, FuncPole.start, 0, 0, 0)
     ]);
     const [ activeSwatchId, setActiveSwatchId ] = useState(initialSwatchId);
 
-    const [ baseFormulas, setBaseFormulas ] = useState(new Swatch(0, "", false, 1, 0, 0, 0, undefined, 0, 0, undefined, 0, 0, undefined, 0, 0));
+    const [ baseFormulas, setBaseFormulas ] = useState(new Swatch(0, "", false, 1, 0, 0, 0, undefined, FuncPole.start, 0, 0, 0, undefined, FuncPole.start, 0, 0, 0, undefined, FuncPole.start, 0, 0, 0));
 
     const activeSwatch = palette.find((swatch) => swatch.id === activeSwatchId);
-    const activeColors = [];
-
-    for( let i = 0; i < activeSwatch?.colors; i++ ) {
-        const hueLinearCoef = activeSwatch.hueCustom ? activeSwatch.hueLinearCoef : baseFormulas.hueLinearCoef;
-        const hueSquareCoef = activeSwatch.hueCustom ? activeSwatch.hueSquareCoef : baseFormulas.hueSquareCoef;
-        const satLinearCoef = activeSwatch.satCustom ? activeSwatch.satLinearCoef : baseFormulas.satLinearCoef;
-        const satSquareCoef = activeSwatch.satCustom ? activeSwatch.satSquareCoef : baseFormulas.satSquareCoef;
-        const valLinearCoef = activeSwatch.valCustom ? activeSwatch.valLinearCoef : baseFormulas.valLinearCoef;
-        const valSquareCoef = activeSwatch.valCustom ? activeSwatch.valSquareCoef : baseFormulas.valSquareCoef;
-        const newHue = activeSwatch.hue + hueLinearCoef*i + hueSquareCoef*(i ** 2);
-        const newSat = activeSwatch.sat + satLinearCoef*i + satSquareCoef*(i ** 2);
-        const newVal = activeSwatch.val + valLinearCoef*i + valSquareCoef*(i ** 2);
-        const newColor = {
-            hue: loopAdjustNumber(newHue, 0, 359),
-            sat: boundAdjustNumber(newSat, 0, 100),
-            val: boundAdjustNumber(newVal, 0, 100)
-        };
-
-        activeColors.push(newColor);
-    }
+    const activeColors = generateActiveColors(activeSwatch, baseFormulas);
 
     return (
         <div className="App">
