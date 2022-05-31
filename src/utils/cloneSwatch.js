@@ -1,9 +1,9 @@
 import { Swatch } from "../classes";
 
 export const cloneSwatch = (swatch, idIn) => {
-    const { id, name, canDefault, colors, hue, sat, val, hueCustom, hueLinearCoef, hueSquareCoef, satCustom, satLinearCoef, satSquareCoef, valCustom, valLinearCoef, valSquareCoef } = swatch;
+    const { id, name, canDefault, colors, hue, sat, val, hueCustom, hueFuncPole, hueFunc, satCustom, satFuncPole, satFunc, valCustom, valFuncPole, valFunc } = swatch;
 
-    return new Swatch(idIn ?? id, name, canDefault, colors, hue, sat, val, hueCustom, hueLinearCoef, hueSquareCoef, satCustom, satLinearCoef, satSquareCoef, valCustom, valLinearCoef, valSquareCoef);
+    return new Swatch(idIn ?? id, name, canDefault, colors, hue, sat, val, hueCustom, hueFuncPole, hueFunc, satCustom, satFuncPole, satFunc, valCustom, valFuncPole, valFunc);
 }
 
 export default cloneSwatch;
