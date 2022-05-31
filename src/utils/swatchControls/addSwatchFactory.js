@@ -1,5 +1,5 @@
 import clonePalette from "../clonePalette";
-import { Swatch } from '../../classes';
+import { Swatch, Polynomial } from '../../classes';
 import { FuncPole } from "../../classes/Swatch";
 
 export const addSwatchFactory = (palette, setPalette) => {
