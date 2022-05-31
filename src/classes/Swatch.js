@@ -4,7 +4,7 @@ export const FuncPole = {
 }
 
 export class Swatch {
-    constructor(idIn, nameIn, canDefault, colorsIn, hueIn, satIn, valIn, hueCustomIn, hueFuncPoleIn, hueLinearCoefIn, hueSquareCoefIn, hueCubeCoefIn, satCustomIn, satFuncPoleIn, satLinearCoefIn, satSquareCoefIn, satCubeCoefIn, valCustomIn, valFuncPoleIn, valLinearCoefIn, valSquareCoefIn, valCubeCoefIn) {
+    constructor(idIn, nameIn, canDefault, colorsIn, hueIn, satIn, valIn, hueCustomIn, hueFuncPoleIn, hueFuncIn, satCustomIn, satFuncPoleIn, satFuncIn, valCustomIn, valFuncPoleIn, valFuncIn) {
         this.id = idIn;
         this.name = nameIn;
         this.canDefault = canDefault;
@@ -14,22 +14,30 @@ export class Swatch {
         this.val = valIn;
         this.hueCustom = hueCustomIn;
         this.hueFuncPole = hueFuncPoleIn;
-        this.hueLinearCoef = hueLinearCoefIn;
-        this.hueSquareCoef = hueSquareCoefIn;
-        this.hueCubeCoef = hueCubeCoefIn;
+        this.hueFunc = hueFuncIn;
         this.satCustom = satCustomIn;
         this.satFuncPole = satFuncPoleIn;
-        this.satLinearCoef = satLinearCoefIn;
-        this.satSquareCoef = satSquareCoefIn;
-        this.satCubeCoef = satCubeCoefIn;
+        this.satFunc = satFuncIn;
         this.valCustom = valCustomIn;
         this.valFuncPole = valFuncPoleIn;
-        this.valLinearCoef = valLinearCoefIn;
-        this.valSquareCoef = valSquareCoefIn;
-        this.valCubeCoef = valCubeCoefIn;
+        this.valFunc = valFuncIn;
     }
 }
 
-export class thirdDegPoly {
+export class Polynomial {
+    constructor(linearCoefIn, squareCoefIn, cubeCoefIn) {
+        this.coefficients = [
+            linearCoefIn,
+            squareCoefIn,
+            cubeCoefIn
+        ];
+    }
 
+    getDegCoef(degree) {
+        return this.coefficients[degree-1];
+    }
+
+    setDegCoef(degree, coefficientIn) {
+        this.coefficients[degree-1] = coefficientIn;
+    }
 }

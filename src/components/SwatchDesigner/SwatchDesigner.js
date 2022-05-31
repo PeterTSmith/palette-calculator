@@ -15,9 +15,21 @@ export const SwatchDesigner = (props) => {
         new FieldValue("sat", "Base Sat", 0, 0, 100),
         new FieldValue("val", "Base Val", 0, 0, 100)
     ];
-    const hueFunctionFields = [new FieldValue("hueLinearCoef", "Linear Coef", 0), new FieldValue("hueSquareCoef", "Square Coef", 0), new FieldValue("hueCubeCoef", "Cube Coef", 0)];
-    const satFunctionFields = [new FieldValue("satLinearCoef", "Linear Coef", 0), new FieldValue("satSquareCoef", "Square Coef", 0), new FieldValue("satCubeCoef", "Cube Coef", 0)];
-    const valFunctionFields = [new FieldValue("valLinearCoef", "Linear Coef", 0), new FieldValue("valSquareCoef", "Square Coef", 0), new FieldValue("valCubeCoef", "Cube Coef", 0)];
+    const hueFunctionFields = [
+        new FieldValue(["hueFunc", 1], "Linear Coef", 0),
+        new FieldValue(["hueFunc", 2], "Square Coef", 0),
+        new FieldValue(["hueFunc", 3], "Cube Coef", 0)
+    ];
+    const satFunctionFields = [
+        new FieldValue(["satFunc", 1], "Linear Coef", 0),
+        new FieldValue(["satFunc", 2], "Square Coef", 0),
+        new FieldValue(["satFunc", 3], "Cube Coef", 0)
+    ];
+    const valFunctionFields = [
+        new FieldValue(["valFunc", 1], "Linear Coef", 0),
+        new FieldValue(["valFunc", 2], "Square Coef", 0),
+        new FieldValue(["valFunc", 3], "Cube Coef", 0)
+    ];
 
     return (
         <div className="swatchDesignerContainer">

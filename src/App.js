@@ -3,19 +3,19 @@ import Toolbar from './components/Toolbar/Toolbar';
 import ColorDisplay from './components/ColorDisplay/ColorDisplay';
 import SwatchDesigner from './components/SwatchDesigner/SwatchDesigner';
 import { setSwatchFactory } from './utils';
-import { Swatch } from './classes';
-import './App.css';
+import { Swatch, Polynomial } from './classes';
 import { FuncPole } from './classes/Swatch';
 import generateActiveColors from './utils/generateActiveColors';
+import './App.css';
 
 function App() {
     const initialSwatchId = new Date().getTime();
     const [ palette, setPalette ] = useState([
-        new Swatch(initialSwatchId, "", true, 1, 0, 0, 0, false, FuncPole.start, 0, 0, 0, false, FuncPole.start, 0, 0, 0, false, FuncPole.start, 0, 0, 0)
+        new Swatch(initialSwatchId, "", true, 1, 0, 0, 0, false, FuncPole.start, new Polynomial(0, 0, 0), false, FuncPole.start, new Polynomial(0, 0, 0), false, FuncPole.start, new Polynomial(0, 0, 0))
     ]);
     const [ activeSwatchId, setActiveSwatchId ] = useState(initialSwatchId);
 
-    const [ baseFormulas, setBaseFormulas ] = useState(new Swatch(0, "", false, 1, 0, 0, 0, undefined, FuncPole.start, 0, 0, 0, undefined, FuncPole.start, 0, 0, 0, undefined, FuncPole.start, 0, 0, 0));
+    const [ baseFormulas, setBaseFormulas ] = useState(new Swatch(0, "", false, 1, 0, 0, 0, undefined, FuncPole.start, new Polynomial(0, 0, 0), undefined, FuncPole.start, new Polynomial(0, 0, 0), undefined, FuncPole.start, new Polynomial(0, 0, 0)));
 
     const activeSwatch = palette.find((swatch) => swatch.id === activeSwatchId);
     const activeColors = generateActiveColors(activeSwatch, baseFormulas);
